@@ -1,0 +1,34 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    force: yes
+    update_cache: yes
+  become: yes
+
+- name: Symlink default site
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify: reload nginx
+  become: yes
+
+- name: Change owner and group of /var/www/html
+  ansible.builtin.file:
+    path: /var/www/html
+    owner: root
+    group: "{{ user.username }}"
+    recurse: yes
+    state: directory
+  become: yes
+
+- name: Set Nginx user
+  lineinfile:
+    dest: /etc/nginx/nginx.conf
+    regexp: "^user"
+    line: "user {{ user.username }};"
+    state: present
+  notify: reload nginx
+  become: yes

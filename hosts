@@ -1,0 +1,5 @@
+# Add hosts here, one per line. Additional groups can be created using
+# [group] syntax. Hosts can join multiple groups.
+
+[provisionning]
+webserver1 ansible_host=127.0.0.1 ansible_user=root ansible_ssh_pass=password
