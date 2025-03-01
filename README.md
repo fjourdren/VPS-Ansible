@@ -28,6 +28,14 @@ wsl --distribution Ubuntu
 ansible-playbook provision.yml -i hosts
 ```
 
+Use it using a ssh key :
+
+```bash
+ansible-playbook provision.yml -i hosts --key-file ~/.ssh/id_rsa
+```
+
+Remember to update the hosts file with the new SSH port and user for subsequent runs.
+
 ## Configuration
 
 ### Main Security Features
